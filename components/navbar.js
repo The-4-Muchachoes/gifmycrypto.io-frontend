@@ -1,7 +1,7 @@
 export default () => {
     const header = document.querySelector('.header');
   
-    return fetch('./components/navbar/navbar.html')
+    return fetch('./components/navbar.html')
       .then((Response) => Response.text())
       .then((navbarHtml) => {
         header.innerHTML = navbarHtml;

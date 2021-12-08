@@ -1,3 +1,4 @@
+import renderNavbar from './components/navbar.js';
 import renderMain from './pages/main/main.js';
 import renderLogin from './pages/login/login.js';
 import renderSignup from './pages/signup/signup.js';
@@ -20,6 +21,10 @@ export default () => {
       console.log('User requested signup page');
     },
   })
-
+  .on({
+    '*': async () => {
+      renderNavbar().then(router.updatePageLinks);
+    },
+  })
     .resolve();
 };
