@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://www.nasdaq.com/sites/acquia.prod/files/2020/11/09/cryptoLP%20banner%203%20jpg.jpg');
+  background-size: 100%;
+}
+
 a {
   display: block;
 }
@@ -13,6 +20,9 @@ a {
 .w100 {
   width: 100%;
 }
+.h150px {
+  height: 150px;
+}
 
 .ta-left {
   text-align: left;
@@ -24,4 +34,50 @@ a {
 
 .ta-right {
   text-align: right;
+}
+.inline-block {
+  display: inline-block;
+}
+
+
+.navbar {
+  background-color: rgb(9, 167, 167);
+  padding: 13px;
+}
+
+.nav-option {
+  margin: 0 8px 0 8px;
+}
+
+.mainTitle {
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.mainText {
+  font-size: 27px !important;
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.SignupTitle {
+  font-size: 40px !important;
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.InputFields {
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.InputFields label {
+  width: 66px;
+  display: inline-block;
+}
+
+.SignupButton {
+  position: fixed;
+  font-size: 16px;
+  left: 48%;
 }
