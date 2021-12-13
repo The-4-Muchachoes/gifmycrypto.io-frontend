@@ -60,6 +60,6 @@ function renderLoggedIn() {
 
   logout.addEventListener('click', () => {
     localStorage.setItem('user', null);
-    window.router.navigate('/');
+    window.location.reload();
   });
 }

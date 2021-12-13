@@ -7,4 +7,5 @@ export default () => {
   const prodApiUrl = 'https://gifmycrypto.io';
 
   window.apiUrl = isLocalhost ? localApiUrl : prodApiUrl;
+  window.cryptoApi = 'https://api.coingecko.com/api/v3/';
 };

@@ -12,21 +12,15 @@ export default () => {
     .on({
       '/': () => {
         renderMain().then(router.updatePageLinks);
-        console.log('User requested main page');
       },
       login: () => {
         renderLogin().then(router.updatePageLinks);
-        console.log('User requested login page');
       },
       signup: () => {
         renderSignup().then(router.updatePageLinks);
-        console.log('User requested signup page');
       },
       // portfolio: () => {
       //   renderPortfolio().then(router.updatePageLinks);
-      // },
-      // requests: () => {
-      //   renderRequest().then(router.updatePageLinks);
       // },
     })
     .on({
