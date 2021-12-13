@@ -1,5 +1,15 @@
+/* Written by everyone */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.ioenotes.edu.np%2Fmedia%2F2015%2F10%2Fcomputer-graphics.jpg&f=1&nofb=1');
+  background-size: 100%;
+}
+
 a {
   display: block;
+  color: cornflowerblue;
 }
 
 .flex {
@@ -14,6 +24,10 @@ a {
   width: 100%;
 }
 
+.h150px {
+  height: 150px;
+}
+
 .ta-left {
   text-align: left;
 }
@@ -24,4 +38,112 @@ a {
 
 .ta-right {
   text-align: right;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.blue {
+  background-color: rgba(61, 61, 61, 0.6);
+  color: cornflowerblue;
+  font-size: 30px;
+  font-weight: bold;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.message {
+  color: red;
+}
+
+.page-wrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  min-width: 50%;
+  width: fit-content;
+  margin: 30px auto;
+  padding: 5px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgb(82, 7, 7);
+  padding: 10px;
+}
+
+.nav-option {
+  margin: 0 8px 0 8px;
+}
+
+.logo-link {
+  font-family: fantasy;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+/* Headers and Titles*/
+
+.mainText {
+  font-size: 27px !important;
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.mainText a {
+  font-size: 27px !important;
+}
+
+.SecondTitle {
+  font-size: 48px !important;
+  text-align: center;
+  color: cornflowerblue;
+}
+.movieTitle {
+  color: cornflowerblue;
+}
+
+/* Signup and Login */
+.InputFields {
+  text-align: center;
+  color: cornflowerblue;
+}
+
+.InputFields label {
+  width: 66px;
+  display: inline-block;
+}
+
+.Buttons {
+  position: fixed;
+  font-size: 16px;
+  left: 48%;
+}
+
+.input-form {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.input-field {
+  text-align: right;
+  margin: 5px 0;
+}
+
+.input-field label {
+  text-align: left;
+}
+
+.input-field input {
+  text-align: right;
+}
+
+.error-message {
+  color: red;
+}
+
+.success-message {
+  color: lawngreen;
 }
