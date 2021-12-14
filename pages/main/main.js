@@ -1,5 +1,6 @@
 import renderPeriodButtons from '../../components/period-changer/period-changer.js';
 import renderLegend from '../../components/legend/legend.js';
+import renderCryptoTable from '../../components/crypto-table/table.js';
 
 export default () => {
   const content = document.querySelector('.content');
@@ -14,9 +15,9 @@ export default () => {
 
 async function run() {
   const marketData = await fetchMarketData();
-  renderPeriodButtons(() => renderTopTenCryptos(marketData));
+  renderPeriodButtons(() => renderCryptoTable(marketData));
   renderLegend();
-  renderTopTenCryptos(marketData);
+  renderCryptoTable(marketData);
 }
 
 async function fetchMarketData() {
@@ -52,7 +53,7 @@ async function renderTopTenCryptos(marketData) {
 }
 
 async function buildTopTenHtml(marketData) {
-  let html = `<table><tbody>`;
+  let html = `<table class="crypto-table"><tbody>`;
 
   await asyncForEach(marketData, async (coin) => {
     const period = window.localStorage['selected-period'];
@@ -87,7 +88,7 @@ function getPortfolioButtonIfAuthenticated() {
     user = JSON.parse(localStorage.getItem('user'));
   } finally {
     if (user && user.accessToken) {
-      return `<td>{add}</td>`;
+      return `<td class="ar-btn-wrapper"></td>`;
     } else return '';
   }
 }

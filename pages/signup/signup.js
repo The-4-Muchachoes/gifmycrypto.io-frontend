@@ -37,6 +37,7 @@ function handleSignInFunctionality() {
           // Saving the JWT to local storage
           localStorage.setItem('user', JSON.stringify(data));
           displayMessage('User signup successful', 'success-message');
+          window.history.go(-1);
         } else if (data.error) {
           if (data.status == 302) {
             displayMessage('Username already taken', 'error-message');
@@ -57,6 +58,6 @@ function redirectIfLoggedIn() {
   try {
     user = JSON.parse(localStorage.getItem('user'));
   } finally {
-    if (user && user.accessToken) window.router.navigate('/');
+    if (user && user.accessToken) window.history.back('/');
   }
 }
