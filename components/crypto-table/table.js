@@ -6,17 +6,20 @@ export default async (cryptoList) => {
   if (table)
     return fetch('./components/crypto-table/table.html')
       .then((Response) => Response.text())
-      .then((tableHtml) => {
+      .then(async (tableHtml) => {
         table.innerHTML = tableHtml;
-        buildCryptoTable(cryptoList, table);
+        await buildCryptoTable(cryptoList, table);
       });
 };
 
-function buildCryptoTable(cryptoList, table) {
+async function buildCryptoTable(cryptoList, table) {
   const tbody = document.querySelector('.crypto-tbody');
   table.appendChild(tbody);
 
-  asyncForEach(cryptoList, async (coin) => await buildCryptoRow(coin, tbody));
+  await asyncForEach(
+    cryptoList,
+    async (coin) => await buildCryptoRow(coin, tbody)
+  );
 }
 
 async function buildCryptoRow(coin, tbody) {
@@ -25,6 +28,8 @@ async function buildCryptoRow(coin, tbody) {
   const performance = getCoinPerformance(coin, period);
   const symbol = coin.symbol.toUpperCase();
   const border = getGifBorderClass(performance);
+
+  tr.setAttribute('id', coin.id);
 
   tr.innerHTML = `
       <td>#${coin.market_cap_rank}</td>
@@ -91,8 +96,9 @@ function appendAddRemoveBtnIfAuthenticated(tr, coin) {
     user = JSON.parse(localStorage.getItem('user'));
   } finally {
     if (user && user.accessToken) {
+      const button = createButton(coin);
       const td = document.createElement('td');
-      td.appendChild(createButton(coin));
+      td.appendChild(button);
       tr.appendChild(td);
     }
   }

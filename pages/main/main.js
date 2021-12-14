@@ -15,9 +15,9 @@ export default () => {
 
 async function run() {
   const marketData = await fetchMarketData();
-  renderPeriodButtons(() => renderCryptoTable(marketData));
+  renderPeriodButtons(() => renderCryptoTable(marketData, () => {}));
   renderLegend();
-  renderCryptoTable(marketData);
+  renderCryptoTable(marketData, () => {});
 }
 
 async function fetchMarketData() {
@@ -30,100 +30,6 @@ async function fetchMarketData() {
   )
     .then((Response) => Response.json())
     .then((topTen) => {
-      console.log(topTen);
       return topTen;
     });
-}
-
-async function fetchGifData(performance) {
-  return await fetch(`${window.apiUrl}/api/public/gif/${performance}`)
-    .then((Response) => Response.json())
-    .then((gifData) => {
-      return gifData;
-    })
-    .catch((error) => {
-      console.log(error);
-      return null;
-    });
-}
-
-async function renderTopTenCryptos(marketData) {
-  const topTen = document.querySelector('.top-10');
-  topTen.innerHTML = await buildTopTenHtml(marketData);
-}
-
-async function buildTopTenHtml(marketData) {
-  let html = `<table class="crypto-table"><tbody>`;
-
-  await asyncForEach(marketData, async (coin) => {
-    const period = window.localStorage['selected-period'];
-    const performance = getCoinPerformance(coin, period);
-    const symbol = coin.symbol.toUpperCase();
-    const border = getGifBorderClass(performance);
-
-    html += `
-      <tr>
-        <td>#${coin.market_cap_rank}</td>
-        <td><img src="${coin.image}" class="fp-coin-logo"></td>
-        <td>${coin.name}</td>
-        <td>${symbol}</td>
-        ${await getGifHtml(performance, border)}
-        ${getPortfolioButtonIfAuthenticated()}
-      </tr>`;
-  });
-
-  html += '</tbody></table>';
-  return html;
-}
-
-async function asyncForEach(array, callback) {
-  for (let i = 0; i < array.length; i++) {
-    await callback(array[i]);
-  }
-}
-
-function getPortfolioButtonIfAuthenticated() {
-  let user;
-  try {
-    user = JSON.parse(localStorage.getItem('user'));
-  } finally {
-    if (user && user.accessToken) {
-      return `<td class="ar-btn-wrapper"></td>`;
-    } else return '';
-  }
-}
-
-function getCoinPerformance(coin, time) {
-  let priceChange;
-  switch (time) {
-    case '1h':
-      priceChange = coin.price_change_percentage_1h_in_currency;
-      break;
-    case '24h':
-      priceChange = coin.price_change_percentage_24h_in_currency;
-      break;
-    case '7d':
-      priceChange = coin.price_change_percentage_7d_in_currency;
-      break;
-  }
-
-  if (priceChange > 1) return 1;
-  else if (priceChange < -1) return -1;
-  else return 0;
-}
-
-async function getGifHtml(performance, border) {
-  const gifData = await fetchGifData(performance);
-  let html;
-  gifData == null
-    ? (html = `<td><img class="fp-gif ${border}" alt="error">`)
-    : (html = `</td><td><img src="${gifData.gifURL}" class="fp-gif ${border}" alt="${gifData.description}"></td>`);
-
-  return html;
-}
-
-function getGifBorderClass(performance) {
-  if (performance == 1) return 'green-border';
-  if (performance == 0) return 'gray-border';
-  if (performance == -1) return 'red-border';
 }

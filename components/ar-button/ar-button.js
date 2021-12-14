@@ -2,6 +2,7 @@ export default (coin) => {
   const button = document.createElement('button');
   const icon = document.createElement('i');
   button.setAttribute('class', 'ar-btn');
+  button.setAttribute('id', coin.id);
   button.appendChild(icon);
 
   setButtonIcon(coin, icon);
