@@ -1,3 +1,6 @@
+import renderPeriodButtons from '../../components/period-changer/period-changer.js';
+import renderLegend from '../../components/legend/legend.js';
+
 export default () => {
   const content = document.querySelector('.content');
 
@@ -11,12 +14,14 @@ export default () => {
 
 async function run() {
   const marketData = await fetchMarketData();
+  renderPeriodButtons(() => renderTopTenCryptos(marketData));
+  renderLegend();
   renderTopTenCryptos(marketData);
 }
 
 async function fetchMarketData() {
   const vsCurrency = `vs_currency=usd`;
-  const perPage = 'per_page=100';
+  const perPage = 'per_page=10';
   const priceChange = 'price_change_percentage=1h,24h,7d';
 
   return await fetch(
@@ -24,6 +29,7 @@ async function fetchMarketData() {
   )
     .then((Response) => Response.json())
     .then((topTen) => {
+      console.log(topTen);
       return topTen;
     });
 }
@@ -49,7 +55,8 @@ async function buildTopTenHtml(marketData) {
   let html = `<table><tbody>`;
 
   await asyncForEach(marketData, async (coin) => {
-    const performance = getCoinPerformance(coin, '24h');
+    const period = window.localStorage['selected-period'];
+    const performance = getCoinPerformance(coin, period);
     const symbol = coin.symbol.toUpperCase();
     const border = getGifBorderClass(performance);
 
@@ -90,10 +97,13 @@ function getCoinPerformance(coin, time) {
   switch (time) {
     case '1h':
       priceChange = coin.price_change_percentage_1h_in_currency;
+      break;
     case '24h':
       priceChange = coin.price_change_percentage_24h_in_currency;
+      break;
     case '7d':
-      priceChange = coin.price_change_percentage_24h_in_currency;
+      priceChange = coin.price_change_percentage_7d_in_currency;
+      break;
   }
 
   if (priceChange > 1) return 1;

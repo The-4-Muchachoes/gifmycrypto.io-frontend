@@ -122,6 +122,67 @@ a {
   padding: 5px 15px;
 }
 
+/* Period Changer */
+.button-wrapper {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.period-changer {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 3px solid white;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.inactive-button:hover {
+  border: 3px solid lawngreen;
+  color: lawngreen;
+}
+
+.active-button {
+  background-color: lawngreen !important;
+  color: black;
+}
+
+/* Legend */
+.legend {
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.legend p {
+  margin: 0 5px 20px 5px;
+}
+
+.legend-line {
+  display: block;
+  width: 40px;
+  border-radius: 5px;
+  margin-bottom: 1px;
+  /* border-bottom: 2px solid rgba(0, 0, 0, 0); */
+}
+
+.green-line {
+  background-color: lawngreen;
+  border: 2px solid lawngreen;
+}
+
+.gray-line {
+  background-color: lightslategray;
+  border: 2px solid lightslategray;
+}
+
+.red-line {
+  background-color: red;
+  border: 2px solid red;
+}
+
 /* Gifs */
 .green-border {
   border: 3px solid lawngreen;

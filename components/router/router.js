@@ -1,6 +1,7 @@
 import renderNavbar from '../navbar/navbar.js';
-import renderMain from '/pages/main/main.js';
-import renderSignup from '/pages/signup/signup.js';
+
+import renderMain from '../../pages/main/main.js';
+import renderSignup from '../../pages/signup/signup.js';
 import renderLogin from '../../pages/login/login.js';
 // import renderProfile from '../../pages/profile/profile.js';
 // import renderRequest from '../../pages/send-friend-request/request.js';
