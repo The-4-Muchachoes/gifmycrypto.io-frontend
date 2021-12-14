@@ -1,4 +1,4 @@
-// Written by Alex
+import fetchPortfolio from '../../components/portfolio/fetch-portfolio.js';
 
 export default () => {
   const content = document.querySelector('.content');
@@ -32,9 +32,10 @@ function handleLoginFunctionality() {
       }),
     })
       .then((Response) => Response.json())
-      .then((data) => {
+      .then(async (data) => {
         if (data.accessToken) {
           localStorage.setItem('user', JSON.stringify(data));
+          await fetchPortfolio();
           window.router.navigate(`/`);
         } else if (data.error) {
           if (data.status == 401) displayMessage(data.message, 'error-message');

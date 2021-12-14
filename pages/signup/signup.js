@@ -1,4 +1,4 @@
-// Written by Periklis
+import fetchPortfolio from '../../components/portfolio/fetch-portfolio.js';
 
 export default () => {
   const content = document.querySelector('.content');
@@ -31,12 +31,13 @@ function handleSignInFunctionality() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(async (data) => {
         console.log(data);
         if (data.accessToken) {
           // Saving the JWT to local storage
           localStorage.setItem('user', JSON.stringify(data));
           displayMessage('User signup successful', 'success-message');
+          await fetchPortfolio();
           window.history.go(-1);
         } else if (data.error) {
           if (data.status == 302) {
