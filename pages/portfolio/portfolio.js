@@ -48,8 +48,12 @@ function addRemoveCoinFromTableEventListeners() {
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      const tr = document.querySelector(`#${button.id}`);
-      tr.outerHTML = '';
+      setTimeout(() => {
+        const tr = document.querySelector(`#${button.id}`);
+        tr.outerHTML = '';
+        if (JSON.parse(sessionStorage.getItem('portfolio')).length == 0)
+          displayEmptyPortfolioMessage();
+      }, 1500);
     });
   });
 }
