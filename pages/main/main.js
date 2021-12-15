@@ -22,7 +22,7 @@ async function run() {
 
 async function fetchMarketData() {
   const vsCurrency = `vs_currency=usd`;
-  const perPage = 'per_page=10';
+  const perPage = 'per_page=100';
   const priceChange = 'price_change_percentage=1h,24h,7d';
 
   return await fetch(
