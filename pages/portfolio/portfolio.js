@@ -3,6 +3,8 @@ import renderLegend from '../../components/legend/legend.js';
 import renderCryptoTable from '../../components/crypto-table/table.js';
 
 export default () => {
+  redirectIfLoggedOut();
+
   const content = document.querySelector('.content');
 
   return fetch('./pages/portfolio/portfolio.html')
@@ -28,11 +30,11 @@ async function run() {
 
 async function fetchMarketData() {
   const portfolio = JSON.parse(sessionStorage.getItem('portfolio'));
+  if (!portfolio || portfolio.length == 0) return [];
+
   const ids = `ids=${portfolio.map((coin) => coin.id).toString()}`;
   const vsCurrency = `vs_currency=usd`;
   const priceChange = 'price_change_percentage=1h,24h,7d';
-
-  if (portfolio.length == 0) return [];
 
   return await fetch(
     `${window.cryptoApi}/coins/markets?${vsCurrency}&${ids}&${priceChange}`
@@ -65,4 +67,13 @@ function displayEmptyPortfolioMessage() {
             <p>Your portfolio is empty</p>
             <img src="https://media.giphy.com/media/4mbL3aNbIHmP6/giphy.gif">
           </div>`;
+}
+
+function redirectIfLoggedOut() {
+  let user;
+  try {
+    user = JSON.parse(localStorage.getItem('user'));
+  } finally {
+    if (!user || !user.accessToken) window.location.href = '/';
+  }
 }

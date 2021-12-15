@@ -31,9 +31,12 @@ function addEventListeners(buttons, callback) {
 }
 
 function renderActiveButton(buttons) {
-  const selectedPeriod = window.localStorage.getItem('selected-period');
+  let selectedPeriod = window.localStorage.getItem('selected-period');
 
-  if (!selectedPeriod) window.localStorage['selected-period'] = '24h';
+  if (!selectedPeriod) window.localStorage.setItem('selected-period', '24h');
+
+  selectedPeriod = window.localStorage.getItem('selected-period');
+
   buttons.forEach((button) => {
     button.setAttribute(
       'class',
